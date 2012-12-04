@@ -27,7 +27,7 @@ Sims$Signalers[Sims$Signaler1 == -0.2 & Sims$Signaler2 == 0.2] <- "-0.2, 0.2"
 # PM's Utility
 ggplot(Sims, aes(x = Omega, y = Upm)) +
         facet_grid(~Signalers) +
-        geom_point(color = "#B2DF8A") +
+        geom_point(color = "#4DAF4A") +
         scale_x_continuous(breaks = c(0.0, 0.4, 0.8), labels = c(0, 0.4, 0.8)) +
         scale_y_continuous(breaks = c(0.0, -0.05, -0.1, -0.15), labels = c(0, -0.05, -0.1, -0.15)) +
         xlab("\n Omega") + ylab("Prime Minister's Utility \n") +
