@@ -1,11 +1,14 @@
 #######################
-# Game Test 2
+# Containment Game
+# Version 1
+# Uses Python 2.7.2
 # Christopher Gandrud
-# 30 November 2012
+# 4 December 2012
 #######################
 
 # Import packages
 import random
+import pymc
 import scipy as sp
 import numpy as np
 import math
@@ -24,9 +27,9 @@ print "gammaHat: ", gammaHat
 # Signaler1 = gammaHat/2
 # Signaler2 = -(gammaHat/2)
 
-# Set at Signaller 1 public pays and signaller 2 Public pays 0
-Signaler1 = -1
-Signaler2 = 0
+# Set Signaller 1 wants lower amount than Signaller 2
+Signaler1 = 1
+Signaler2 = 1
 
 ##### NOTE: We probably need to change the payoffs.  Signallers who want a
 ##### small cost will always share a Moderate PM's preferences Or assume that
@@ -40,9 +43,9 @@ Lower = gammaHat + (2 * Signaler2)
 print "Lower Bound: ", Lower
 print "Upper Bound: ", Upper
 
-if omega < Lower or omega > Upper:
+if  Lower < omega < Upper:
 	guarantee = gammaHat
-elif omega >= Lower and omega <= Upper:
+else:
 	guarantee = omega
 
 print "Guarantee Decision: ", guarantee
