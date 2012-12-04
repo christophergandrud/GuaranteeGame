@@ -16,6 +16,8 @@ import pandas
 # Initialize Lists
 OmegaL = []
 UpmL = []
+Us1L = []
+Us2L = []
 Signaler1L = []
 Signaler2L = []
 
@@ -48,21 +50,28 @@ for omega in OmegaRange:
 			else:
 				guarantee = omega
 
-			# Find PM's utility
+			# Find utilities
 
 			Xreal = guarantee - omega
 
 			Upm = -(math.pow((0 - Xreal), 2))
 
+			Us1 = -(math.pow((S1 - Xreal), 2))
+			Us2 = -(math.pow((S2 - Xreal), 2))
+
 			# Append to lists
 
 			OmegaL.append(omega)
 			UpmL.append(Upm)
+			Us1L.append(Us1)
+			Us2L.append(Us2)
 			Signaler1L.append(S1)
 			Signaler2L.append(S2)
 
 d = {'Omega': OmegaL,
 	'Upm' : UpmL,
+	'Us1' : Us1L,
+	'Us2' : Us2L,
 	'Signaler1' : Signaler1L,
 	'Signaler2' : Signaler2L
 	}
@@ -70,6 +79,6 @@ d = {'Omega': OmegaL,
 # Create data frame
 OutputData = pandas.DataFrame(d)
 
-OutputData.to_csv('/git_repositories/ContainmentGame/SimulatedData/Test.csv')
+OutputData.to_csv('/git_repositories/ContainmentGame/SimulatedData/SimData.csv')
 
 
