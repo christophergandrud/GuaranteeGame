@@ -8,19 +8,16 @@
 
 # Import packages
 import random
-import pymc
 import scipy as sp
 import numpy as np
 import math
+import pandas
 
-#### Create proportion of recoverable assets to all assets ####
-# True value
-omega = random.uniform(0, 0.85)
-print "omega: ", omega
-
-# Expected value 
-gammaHat = sp.mean(np.random.uniform(0, 0.85, 10000)) 
-print "gammaHat: ", gammaHat
+# Initialize Lists
+OmegaL = []
+UpmL = []
+Signaler1L = []
+Signaler2L = []
 
 #### Create Two Signaler's Preferences (assume that they are symmetric)
 # Set at +- half gammaHat 
@@ -28,32 +25,49 @@ print "gammaHat: ", gammaHat
 # Signaler2 = -(gammaHat/2)
 
 # Set Signaller 1 wants lower amount than Signaller 2
-Signaler1 = 1
-Signaler2 = 1
+Signaler1 = -0.1
+Signaler2 = 0.1
 
-##### NOTE: We probably need to change the payoffs.  Signallers who want a
-##### small cost will always share a Moderate PM's preferences Or assume that
-##### issuing guarantees always has a cost, i.e. opportunity costs and interst
-##### costs
+#### Create proportion of recoverable assets to all assets ####
+# True value
+OmegaRange = np.random.uniform(0, 0.85, 1000) 
 
-# Find if omega falls within [gammaHat + 2*Signaler1, gammaHat + 2*Signaler1]
-Upper = gammaHat + (2 * Signaler1)
-Lower = gammaHat + (2 * Signaler2) 
+for omega in OmegaRange:
 
-print "Lower Bound: ", Lower
-print "Upper Bound: ", Upper
+	# Expected value 
+	gammaHat = sp.mean(np.random.uniform(0, 0.85, 10000)) 
 
-if  Lower < omega < Upper:
-	guarantee = gammaHat
-else:
-	guarantee = omega
+	# Find if omega falls within [gammaHat + 2*Signaler1, gammaHat + 2*Signaler1]
+	Lower = gammaHat + (2 * Signaler1)
+	Upper = gammaHat + (2 * Signaler2) 
 
-print "Guarantee Decision: ", guarantee
+	if  Lower < omega < Upper:
+		guarantee = gammaHat
+	else:
+		guarantee = omega
 
-Xreal = guarantee - omega
+	# Find PM's utility
 
-Upm = -(math.pow((0 - Xreal), 2))
+	Xreal = guarantee - omega
 
-print "PM's Utility: ", Upm
+	Upm = -(math.pow((0 - Xreal), 2))
+
+	# Append to lists
+
+	OmegaL.append(omega)
+	UpmL.append(Upm)
+	Signaler1L.append(Signaler1)
+	Signaler2L.append(Signaler2)
+
+d = {'Omega': OmegaL,
+	'Upm' : UpmL,
+	'Signaler1' : Signaler1L,
+	'Signaler2' : Signaler2L
+	}
+
+# Create data frame
+OutputData = pandas.DataFrame(d)
+
+OutputData.to_csv('/git_repositories/ContainmentGame/SimulatedData/Test.csv')
 
 
