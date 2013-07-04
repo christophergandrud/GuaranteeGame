@@ -1,4 +1,4 @@
-# Containment Game
+# Guarantee Game
 ## Christopher Gandrud & with Mícheál O'Keeffe
 
 A simply Python based simulation of a banking crisis containment signalling game.

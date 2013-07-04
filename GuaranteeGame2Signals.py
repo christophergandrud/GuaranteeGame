@@ -1,9 +1,9 @@
 #######################
-# Containment Game: 2 Signallers
+# Guarantee Game: 2 Signallers
 # Version 1
 # Uses Python 2.7.2
 # Christopher Gandrud
-# 5 December 2012
+# 4 July 2013
 #######################
 
 # Import packages
@@ -14,7 +14,7 @@ import math
 import pandas
 
 # Initialize Lists
-OmegaL = []
+omegaL = []
 GuaranteeL = []
 UpmL = []
 Us1L = []
@@ -24,18 +24,18 @@ Signaler2L = []
 
 #### Create proportion of recoverable assets to all assets ####
 # True value
-OmegaRange = np.random.uniform(0, 0.85, 1000) 
+omegaRange = np.random.uniform(0, 0.9, 1000) 
 
 # Set Signaller 1 wants lower amount than Signaller 2
 S1Range = [-0.05, -0.15]
 S2Range = [0.05, 0.15]
 
-for omega in OmegaRange:
+for omega in omegaRange:
 	for S1 in S1Range:
 		for S2 in S2Range:
 
 			# Expected value 
-			gammaHat = sp.mean(np.random.uniform(0, 0.85, 100000)) 
+			gammaHat = sp.mean(np.random.uniform(0, 0.9, 100000)) 
 
 			# Find if omega falls within 
 			# [gammaHat + 2*Signaler1, gammaHat + 2*Signaler1]
@@ -58,7 +58,7 @@ for omega in OmegaRange:
 
 			# Append to lists
 
-			OmegaL.append(omega)
+			omegaL.append(omega)
 			GuaranteeL.append(guarantee)
 			UpmL.append(Upm)
 			Us1L.append(Us1)
@@ -66,7 +66,7 @@ for omega in OmegaRange:
 			Signaler1L.append(S1)
 			Signaler2L.append(S2)
 
-d = {'Omega' : OmegaL,
+d = {'omega' : omegaL,
 	'Guarantee' : GuaranteeL,
 	'Upm' : UpmL,
 	'Us1' : Us1L,
@@ -78,6 +78,6 @@ d = {'Omega' : OmegaL,
 # Create data frame
 OutputData = pandas.DataFrame(d)
 
-OutputData.to_csv('/git_repositories/ContainmentGame/SimulatedData/SimData.csv')
+OutputData.to_csv('/git_repositories/GuaranteeGame/SimulatedData/SimData09.csv')
 
 
