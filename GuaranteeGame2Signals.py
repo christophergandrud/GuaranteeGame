@@ -24,7 +24,7 @@ Signaler2L = []
 
 #### Create proportion of recoverable assets to all assets ####
 # True value
-omegaRange = np.random.uniform(0, 0.9, 1000) 
+omegaRange = np.random.uniform(0.6, 0.9, 1000) 
 
 # Set Signaller 1 wants lower amount than Signaller 2
 S1Range = [-0.05, -0.15]
@@ -35,7 +35,7 @@ for omega in omegaRange:
 		for S2 in S2Range:
 
 			# Expected value 
-			gammaHat = sp.mean(np.random.uniform(0, 0.9, 100000)) 
+			gammaHat = sp.mean(np.random.uniform(0.6, 0.9, 100000)) 
 
 			# Find if omega falls within 
 			# [gammaHat + 2*Signaler1, gammaHat + 2*Signaler1]
