@@ -1,6 +1,10 @@
-# Containment Game
-## Christopher Gandrud & Mícheál O'Keeffe
+Containment Game
+===
+
+### Christopher Gandrud & Mícheál O'Keeffe
+
+#### 8 Feb 2014
 
 A simple Python based simulation of a banking crisis containment signalling game with two signallers.
 
-For an old version of the paper associated with this game see <http://ssrn.com/abstract=2173021>.
+The working paper describing the underlying model and simulation results can be found at: <http://ssrn.com/abstract=2353839>.
