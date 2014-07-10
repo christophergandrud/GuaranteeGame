@@ -3,7 +3,7 @@ Containment Game
 
 ### Christopher Gandrud & Mícheál O'Keeffe
 
-#### 8 Feb 2014
+#### 10 July 2014
 
 A simple Python based simulation of a banking crisis containment signalling game with two signallers.
 
