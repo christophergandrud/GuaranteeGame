@@ -1,9 +1,10 @@
 #######################
 # Guarantee Game: 2 Signallers
-# Version 1
-# Uses Python 2.7.2
+# Version 1.1
+# Uses Python 2.7.6
 # Christopher Gandrud
-# 25 July 2013
+# 10 July 2014
+# MIT License
 #######################
 
 # Import packages
@@ -14,6 +15,7 @@ import math
 import pandas
 
 # Initialize Lists
+XrealL= []
 omegaL = []
 GuaranteeL = []
 UpmL = []
@@ -24,7 +26,7 @@ Signaler2L = []
 
 #### Create proportion of recoverable assets to all assets ####
 # True value
-omegaRange = np.random.uniform(0.65, 0.95, 1000) 
+omegaRange = np.random.uniform(0.65, 0.95, 1000)
 
 # Set Signaller 1 wants lower amount than Signaller 2
 S1Range = [-0.05, -0.15]
@@ -34,13 +36,13 @@ for omega in omegaRange:
 	for S1 in S1Range:
 		for S2 in S2Range:
 
-			# Expected value 
-			gammaHat = sp.mean(np.random.uniform(0.65, 0.95, 100000)) 
+			# Expected value
+			gammaHat = sp.mean(np.random.uniform(0.65, 0.95, 100000))
 
-			# Find if omega falls within 
+			# Find if omega falls within
 			# [gammaHat + 2*Signaler1, gammaHat + 2*Signaler2]
 			Lower = gammaHat + (2 * S1)
-			Upper = gammaHat + (2 * S2) 
+			Upper = gammaHat + (2 * S2)
 
 			if  Lower < omega < Upper:
 				guarantee = gammaHat
@@ -48,7 +50,6 @@ for omega in omegaRange:
 				guarantee = omega
 
 			# Find utilities
-
 			Xreal = guarantee - omega
 
 			Upm = -(math.pow((0 - Xreal), 2))
@@ -57,7 +58,7 @@ for omega in omegaRange:
 			Us2 = -(math.pow((S2 - Xreal), 2))
 
 			# Append to lists
-
+			XrealL.append(Xreal)
 			omegaL.append(omega)
 			GuaranteeL.append(guarantee)
 			UpmL.append(Upm)
@@ -66,7 +67,9 @@ for omega in omegaRange:
 			Signaler1L.append(S1)
 			Signaler2L.append(S2)
 
-d = {'omega' : omegaL,
+d = {
+	'Xreal' : XrealL,
+	'omega' : omegaL,
 	'Guarantee' : GuaranteeL,
 	'Upm' : UpmL,
 	'Us1' : Us1L,
@@ -78,6 +81,4 @@ d = {'omega' : omegaL,
 # Create data frame
 OutputData = pandas.DataFrame(d)
 
-OutputData.to_csv('/git_repositories/GuaranteeGame/SimulatedData/SimData09.csv')
-
-
+OutputData.to_csv('/git_repositories/GuaranteeGame/SimulatedData/SimData09_2014.csv')
