@@ -1,7 +1,7 @@
 ###############
 # Create Guarantee Signalling Game Simulation Plots
 # Christopher Gandrud
-# 20 July 2014
+# 18 July 2014
 # Depends on Python 2.7.6
 # MIT License
 ###############
@@ -43,7 +43,7 @@ GuarOmega <- ggplot(Sims, aes(x = omega, y = Xreal)) +
                 geom_point() +
                 scale_x_continuous(breaks = c(0.7, 0.8, 0.9), 
                                     labels = c(0.7, 0.8, 0.9)) +
-                xlab("") + ylab("Guarantee - omega i\n") +
+                xlab("") + ylab("Guarantee Decision - omega i\n") +
                 theme_bw(base_size = 10)
 
 # Guarantee Decision (gk)
