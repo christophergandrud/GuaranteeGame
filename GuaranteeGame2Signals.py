@@ -3,7 +3,7 @@
 # Version 1.1
 # Uses Python 2.7.6
 # Christopher Gandrud
-# 10 July 2014
+# 21 July 2014
 # MIT License
 #######################
 
@@ -16,7 +16,7 @@ import pandas
 
 # Initialize Lists
 XrealL= []
-omegaL = []
+alphaL = []
 GuaranteeL = []
 UpmL = []
 Us1L = []
@@ -26,40 +26,38 @@ Signaler2L = []
 
 #### Create proportion of recoverable assets to all assets ####
 # True value
-omegaRange = np.random.uniform(0.65, 0.95, 1000)
+alphaRange = np.random.uniform(0.65, 0.95, 1000)
 
 # Set Signaller 1 wants lower amount than Signaller 2
 S1Range = [-0.05, -0.15]
 S2Range = [0.05, 0.15]
 
-for omega in omegaRange:
+for alpha in alphaRange:
 	for S1 in S1Range:
 		for S2 in S2Range:
 
 			# Expected value
 			gammaHat = sp.mean(np.random.uniform(0.65, 0.95, 100000))
 
-			# Find if omega falls within
+			# Find if alpha falls within
 			# [gammaHat + 2*Signaler1, gammaHat + 2*Signaler2]
 			Lower = gammaHat + (2 * S1)
 			Upper = gammaHat + (2 * S2)
 
-			if  Lower < omega < Upper:
+			if  Lower < alpha < Upper:
 				guarantee = gammaHat
 			else:
-				guarantee = omega
+				guarantee = alpha
 
 			# Find utilities
-			Xreal = guarantee - omega
-
+			Xreal = guarantee - alpha
 			Upm = -(math.pow((0 - Xreal), 2))
-
 			Us1 = -(math.pow((S1 - Xreal), 2))
 			Us2 = -(math.pow((S2 - Xreal), 2))
 
 			# Append to lists
 			XrealL.append(Xreal)
-			omegaL.append(omega)
+			alphaL.append(alpha)
 			GuaranteeL.append(guarantee)
 			UpmL.append(Upm)
 			Us1L.append(Us1)
@@ -69,7 +67,7 @@ for omega in omegaRange:
 
 d = {
 	'Xreal' : XrealL,
-	'omega' : omegaL,
+	'Alpha' : alphaL,
 	'Guarantee' : GuaranteeL,
 	'Upm' : UpmL,
 	'Us1' : Us1L,
